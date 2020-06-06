@@ -67,7 +67,7 @@ public class MongoTestHelper
         {
             long start = System.currentTimeMillis();
             mongo.start();
-            mongoHost =  mongo.getHost();
+            mongoHost =  mongo.getContainerIpAddress();
             mongoPort = mongo.getMappedPort(27017);
             LOG.info("Mongo container started for {}:{} - {}ms", mongoHost, mongoPort,
                      System.currentTimeMillis() - start);
