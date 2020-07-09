@@ -34,6 +34,7 @@ pipeline {
                        classPattern: '**/target/classes',
                        sourcePattern: '**/src/main/java'
                 warnings consoleParsers: [[parserName: 'Maven'], [parserName: 'Java']]
+                archiveArtifacts artifacts: "jetty-client/target/surefire-reports/TEST-org.eclipse.jetty.client.ConnectionPoolTest.xml",allowEmptyArchive: true
                 junit testResults: '**/target/surefire-reports/*.xml,**/target/invoker-reports/TEST*.xml,**/target/autobahntestsuite-reports/*.xml'
               }
             }
@@ -46,6 +47,7 @@ pipeline {
               timeout( time: 120, unit: 'MINUTES' ) {
                 mavenBuild( "jdk14", "-T3 clean install", "maven3", true )
                 warnings consoleParsers: [[parserName: 'Maven'], [parserName: 'Java']]
+                archiveArtifacts artifacts: "jetty-client/target/surefire-reports/TEST-org.eclipse.jetty.client.ConnectionPoolTest.xml",allowEmptyArchive: true
                 junit testResults: '**/target/surefire-reports/*.xml,**/target/invoker-reports/TEST*.xml'
               }
             }
