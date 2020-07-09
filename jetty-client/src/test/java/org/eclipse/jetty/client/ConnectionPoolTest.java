@@ -357,7 +357,7 @@ public class ConnectionPoolTest
         assertEquals(1, destinations.size());
         HttpDestination destination = (HttpDestination)destinations.get(0);
         AbstractConnectionPool connectionPool = (AbstractConnectionPool)destination.getConnectionPool();
-        assertThat(connectionPool.getConnectionCount(), Matchers.lessThanOrEqualTo(count));
+        assertThat("testConcurrentRequestsDontOpenTooManyConnections: '" + factory.name + "'", connectionPool.getConnectionCount(), Matchers.lessThanOrEqualTo(count));
     }
 
     private static class ConnectionPoolFactory
