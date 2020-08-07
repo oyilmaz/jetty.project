@@ -240,7 +240,9 @@ public class PathResource extends Resource
             if (LOG.isDebugEnabled())
                 LOG.debug("Unable to get absolute path for {}", path, ioError);
         }
-        this.path = absPath;
+
+        // cleanup any lingering relative path nonsense (like "/./" and "/../")
+        this.path = absPath.normalize();
 
         assertValidPath(path);
         this.uri = this.path.toUri();
